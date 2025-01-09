@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import GithubContext from "../../context/github/GithubContext";
-import Alert from "../layout/Alert";
 
 function UserSearch({ handleAlert }) {
   const [text, setText] = useState("");

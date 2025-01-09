@@ -2,7 +2,7 @@ import React from "react";
 
 function Alert({ alert }) {
   return (
-    alert !== null && (
+    alert !== "" && (
       <p className="flex items-start mb-2 space-x-2">
         <span>😁</span>
         <span className="flex-1 text-base font-semibold leading-7">
