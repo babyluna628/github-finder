@@ -11,6 +11,8 @@ export const GithubProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
+  //유저들  클리어
+  const clearUsers = () => setUsers([]);
 
   //키워드로 유저찾기
   const searchUsers = (text) => {
@@ -47,7 +49,7 @@ export const GithubProvider = ({ children }) => {
 
   return (
     <GithubContext.Provider
-      value={{ users, user, loading, searchUsers, getUser }}
+      value={{ users, user, loading, searchUsers, getUser, clearUsers }}
     >
       {children}
     </GithubContext.Provider>
