@@ -9,6 +9,7 @@ const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 //프로바이더가 전역으로 컨텍스트를 사용할 수 있게 함
 export const GithubProvider = ({ children }) => {
   const [users, setUsers] = useState([]);
+  const [repos, setRepos] = useState([]);
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   //유저들  클리어
@@ -31,6 +32,7 @@ export const GithubProvider = ({ children }) => {
       })
       .catch((err) => console.log(err));
   };
+  //유저검색
   const getUser = (login) => {
     setLoading(true); //로딩 시작
 
@@ -46,10 +48,35 @@ export const GithubProvider = ({ children }) => {
       })
       .catch((err) => (window.location = "/notfound"));
   };
+  //유저 공개리포 리스트
+  const getUserRepos = (login) => {
+    setLoading(true); //로딩 시작
+
+    fetch(`${GITHUB_URL}/users/${login}/repos`, {
+      headers: {
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setRepos(data);
+        setLoading(false); //로딩 완료
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <GithubContext.Provider
-      value={{ users, user, loading, searchUsers, getUser, clearUsers }}
+      value={{
+        users,
+        repos,
+        user,
+        loading,
+        searchUsers,
+        getUser,
+        clearUsers,
+        getUserRepos,
+      }}
     >
       {children}
     </GithubContext.Provider>
