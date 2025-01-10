@@ -10,7 +10,9 @@ function User() {
   const params = useParams();
 
   useEffect(() => {
-    getUser(params.login);
+    if (params.login) {
+      getUser(params.login);
+    }
   }, []);
 
   if (loading) {
